@@ -37,15 +37,40 @@ def example_transform(example):
 def custom_transform(example):
     ################################
     ##### YOUR CODE BEGINGS HERE ###
+    qwerty_neighbors = {        
+        'q': ['w', 'a'], 'w': ['q', 'e', 's'], 'e': ['w', 'r', 'd'], 
+        'r': ['e', 't', 'f'], 't': ['r', 'y', 'g'], 'y': ['t', 'u', 'h'],
+        'u': ['y', 'i', 'j'], 'i': ['u', 'o', 'k'], 'o': ['i', 'p', 'l'],
+        'p': ['o', 'l'],
+        'a': ['q', 's', 'z'], 's': ['w', 'a', 'd', 'z', 'x'], 
+        'd': ['e', 's', 'f', 'x', 'c'], 'f': ['r', 'd', 'g', 'c', 'v'],
+        'g': ['t', 'f', 'h', 'v', 'b'], 'h': ['y', 'g', 'j', 'b', 'n'],
+        'j': ['u', 'h', 'k', 'n', 'm'], 'k': ['i', 'j', 'l', 'm'],
+        'l': ['o', 'k', 'p'],
+        'z': ['a', 's', 'x'], 'x': ['s', 'd', 'z', 'c'], 
+        'c': ['d', 'f', 'x', 'v'], 'v': ['f', 'g', 'c', 'b'],
+        'b': ['g', 'h', 'v', 'n'], 'n': ['h', 'j', 'b', 'm'],
+        'm': ['j', 'k', 'n']
+    }
+    text = example["text"]
+    words = text.split()
+    transformed_words = []
+    word_p = 0.15
+    char_p = 0.3
 
-    # Design and implement the transformation as mentioned in pdf
-    # You are free to implement any transformation but the comments at the top roughly describe
-    # how you could implement two of them --- synonym replacement and typos.
+    for word in words:
+        if random.random() < word_p:
+            word_chars = list(word)
+            for i, char in enumerate(word_chars):
+                lower_char = char.lower()
+                if lower_char in qwerty_neighbors and random.random() < char_p:
+                    neighbor = random.choice(qwerty_neighbors[lower_char])
+                    if char.isupper():
+                        neighbor = neighbor.upper()
+                    word_chars[i] = neighbor
+            transformed_words.append(''.join(word_chars))
+        else:
+            transformed_words.append(word)
 
-    # You should update example["text"] using your transformation
-
-    raise NotImplementedError
-
-    ##### YOUR CODE ENDS HERE ######
-
+    example["text"] = " ".join(transformed_words)
     return example

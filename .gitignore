@@ -1,0 +1,33 @@
+# Python bytecode / cache
+__pycache__/
+**/__pycache__/
+*.py[cod]
+
+# Common Python virtual envs and env files
+venv/
+.venv/
+env/
+ENV/
+.env
+
+# Cluster output patterns (SLURM)
+slurm-*.out
+*.out
+
+# Common build / editor / OS files
+*.pyc
+*.pyo
+*.pyd
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/
+
+# Project-specific result/record folders (optional; remove if you want them tracked)
+records/
+results/
+out/

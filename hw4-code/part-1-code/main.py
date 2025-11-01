@@ -45,9 +45,23 @@ def do_train(args, model, train_dataloader, save_dir="./out"):
     # You can use progress_bar.update(1) to see the progress during training
     # You can refer to the pytorch tutorial covered in class for reference
 
-    raise NotImplementedError
+    for epoch in range(num_epochs):
+        for batch in train_dataloader:
+            # Move batch to device
+            batch = {k: v.to(device) for k, v in batch.items()}
 
-    ##### YOUR CODE ENDS HERE ######
+            # Forward pass
+            outputs = model(**batch)
+            loss = outputs.loss
+
+            # Backward pass
+            loss.backward()
+            optimizer.step()
+            lr_scheduler.step()
+            optimizer.zero_grad()
+            progress_bar.update(1)
+
+
 
     print("Training completed...")
     print("Saving Model....")
