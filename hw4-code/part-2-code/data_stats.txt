@@ -1,0 +1,36 @@
+============================================================
+TABLE 1: Statistics Before Preprocessing
+============================================================
+
+Train Set:
+  Number of examples: 4225
+  Mean sentence length: 10.96 words
+  Mean SQL query length: 60.90 words
+  Vocabulary size (NL): 868
+  Vocabulary size (SQL): 644
+
+Dev Set:
+  Number of examples: 466
+  Mean sentence length: 10.91 words
+  Mean SQL query length: 58.90 words
+  Vocabulary size (NL): 444
+  Vocabulary size (SQL): 393
+
+============================================================
+TABLE 2: Statistics After Preprocessing (T5 Tokenizer)
+============================================================
+Model: google-t5/t5-small
+
+Train Set:
+  Mean sentence length: 17.10 tokens
+  Mean SQL query length: 216.37 tokens
+  Vocabulary size (NL): 791
+  Vocabulary size (SQL): 555
+
+Dev Set:
+  Mean sentence length: 17.07 tokens
+  Mean SQL query length: 210.05 tokens
+  Vocabulary size (NL): 465
+  Vocabulary size (SQL): 395
+
+============================================================
