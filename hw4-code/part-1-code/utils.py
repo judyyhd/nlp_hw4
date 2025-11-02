@@ -55,8 +55,8 @@ def custom_transform(example):
     text = example["text"]
     words = text.split()
     transformed_words = []
-    word_p = 0.15
-    char_p = 0.3
+    word_p = 0.37
+    char_p = 0.4
 
     for word in words:
         if random.random() < word_p:
