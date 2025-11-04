@@ -13,6 +13,7 @@
 
 python3 train_t5.py \
     --finetune \
+    --auto_resume \
     --batch_size 16 \
     --test_batch_size 16 \
     --learning_rate 1e-4 \

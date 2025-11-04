@@ -15,6 +15,35 @@ from utils import compute_metrics, save_queries_and_records
 DEVICE = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 PAD_IDX = 0
 
+def save_training_state(checkpoint_dir, epoch, best_f1, epochs_since_improvement, optimizer, scheduler):
+    """Save training state for resuming"""
+    state = {
+        'epoch': epoch,
+        'best_f1': best_f1,
+        'epochs_since_improvement': epochs_since_improvement,
+        'optimizer_state_dict': optimizer.state_dict(),
+        'scheduler_state_dict': scheduler.state_dict() if scheduler is not None else None,
+    }
+    torch.save(state, os.path.join(checkpoint_dir, 'training_state.pt'))
+
+def load_training_state(checkpoint_dir, optimizer, scheduler):
+    """Load training state for resuming"""
+    state_path = os.path.join(checkpoint_dir, 'training_state.pt')
+    if os.path.exists(state_path):
+        state = torch.load(state_path, map_location=DEVICE)
+        optimizer.load_state_dict(state['optimizer_state_dict'])
+        if scheduler is not None and state['scheduler_state_dict'] is not None:
+            scheduler.load_state_dict(state['scheduler_state_dict'])
+        return state['epoch'], state['best_f1'], state['epochs_since_improvement']
+    return 0, -1, 0
+
+def find_latest_checkpoint(experiment_name, model_type='ft'):
+    """Find the latest checkpoint for resuming training"""
+    checkpoint_base = os.path.join('checkpoints', f'{model_type}_experiments', experiment_name)
+    if os.path.exists(checkpoint_base) and os.path.exists(os.path.join(checkpoint_base, 'training_state.pt')):
+        return checkpoint_base
+    return None
+
 def get_args():
     '''
     Arguments for training. You may choose to change or extend these as you see fit.
@@ -44,6 +73,14 @@ def get_args():
     parser.add_argument('--experiment_name', type=str, default='experiment',
                         help="How should we name this experiment?")
 
+    # Checkpoint arguments
+    parser.add_argument('--resume_from_checkpoint', type=str, default=None,
+                        help="Path to checkpoint directory to resume training from")
+    parser.add_argument('--auto_resume', action='store_true',
+                        help="Automatically resume from latest checkpoint if available")
+    parser.add_argument('--save_every_n_epochs', type=int, default=1,
+                        help="Save checkpoint every N epochs")
+
     # Data hyperparameters
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--test_batch_size', type=int, default=16)
@@ -54,17 +91,29 @@ def get_args():
 def train(args, model, train_loader, dev_loader, optimizer, scheduler):
     best_f1 = -1
     epochs_since_improvement = 0
+    start_epoch = 0
 
     model_type = 'ft' if args.finetune else 'scr'
     checkpoint_dir = os.path.join('checkpoints', f'{model_type}_experiments', args.experiment_name)
     os.makedirs(checkpoint_dir, exist_ok=True)
     args.checkpoint_dir = checkpoint_dir
+    
+    # Try to resume from checkpoint if specified
+    if args.resume_from_checkpoint:
+        print(f"Resuming training from checkpoint: {args.resume_from_checkpoint}")
+        args.checkpoint_dir = args.resume_from_checkpoint
+        start_epoch, best_f1, epochs_since_improvement = load_training_state(
+            args.resume_from_checkpoint, optimizer, scheduler
+        )
+        print(f"Resuming from epoch {start_epoch}, best F1: {best_f1:.4f}")
+    
     experiment_name = 'ft_experiment'
     gt_sql_path = os.path.join(f'data/dev.sql')
     gt_record_path = os.path.join(f'records/dev_gt_records.pkl')
     model_sql_path = os.path.join(f'results/t5_{model_type}_{experiment_name}_dev.sql')
     model_record_path = os.path.join(f'records/t5_{model_type}_{experiment_name}_dev.pkl')
-    for epoch in range(args.max_n_epochs):
+    
+    for epoch in range(start_epoch, args.max_n_epochs):
         tr_loss = train_epoch(args, model, train_loader, optimizer, scheduler)
         print(f"Epoch {epoch}: Average train loss was {tr_loss}")
 
@@ -94,8 +143,12 @@ def train(args, model, train_loader, dev_loader, optimizer, scheduler):
         save_model(checkpoint_dir, model, best=False)
         if epochs_since_improvement == 0:
             save_model(checkpoint_dir, model, best=True)
+        
+        # Save training state
+        save_training_state(checkpoint_dir, epoch + 1, best_f1, epochs_since_improvement, optimizer, scheduler)
 
         if epochs_since_improvement >= args.patience_epochs:
+            print(f"Early stopping: No improvement for {args.patience_epochs} epochs")
             break
 
 def train_epoch(args, model, train_loader, optimizer, scheduler):
@@ -161,7 +214,32 @@ def main():
 
     # Load the data and the model
     train_loader, dev_loader, test_loader = load_t5_data(args.batch_size, args.test_batch_size)
-    model = initialize_model(args)
+    
+    # Check for auto-resume
+    if args.auto_resume and not args.resume_from_checkpoint:
+        model_type = 'ft' if args.finetune else 'scr'
+        latest_checkpoint = find_latest_checkpoint(args.experiment_name, model_type)
+        if latest_checkpoint:
+            args.resume_from_checkpoint = latest_checkpoint
+            print(f"Auto-resuming from latest checkpoint: {latest_checkpoint}")
+    
+    # Initialize or load model from checkpoint
+    if args.resume_from_checkpoint:
+        print(f"Loading model from checkpoint: {args.resume_from_checkpoint}")
+        # Try to load the last model first, fall back to best model
+        try:
+            model = load_model_from_checkpoint(args, best=False)
+            args.checkpoint_dir = args.resume_from_checkpoint
+        except:
+            try:
+                model = load_model_from_checkpoint(args, best=True)
+                args.checkpoint_dir = args.resume_from_checkpoint
+            except:
+                print("Could not load model from checkpoint, initializing new model")
+                model = initialize_model(args)
+    else:
+        model = initialize_model(args)
+    
     optimizer, scheduler = initialize_optimizer_and_scheduler(args, model, len(train_loader))
 
     # Train 
