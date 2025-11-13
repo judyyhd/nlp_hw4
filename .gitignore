@@ -31,3 +31,6 @@ dist/
 records/
 results/
 out/
+checkpoints/
+*.log
+*.err
