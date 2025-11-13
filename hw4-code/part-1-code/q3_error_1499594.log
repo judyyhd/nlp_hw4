@@ -1,132 +1,0 @@
-/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-Map:   0%|          | 0/5000 [00:00<?, ? examples/s]Map:   0%|          | 2/5000 [00:00<04:56, 16.88 examples/s]Map:   0%|          | 6/5000 [00:00<03:15, 25.60 examples/s]Map:   0%|          | 11/5000 [00:00<03:10, 26.16 examples/s]Map:   0%|          | 15/5000 [00:00<02:56, 28.31 examples/s]Map:   1%|          | 40/5000 [00:00<01:02, 79.30 examples/s]Map:   1%|▏         | 72/5000 [00:00<00:37, 129.87 examples/s]Map:   8%|▊         | 401/5000 [00:00<00:04, 932.22 examples/s]Map:  15%|█▍        | 729/5000 [00:01<00:02, 1555.72 examples/s]Map:  20%|██        | 1015/5000 [00:01<00:02, 1911.20 examples/s]Map:  27%|██▋       | 1337/5000 [00:01<00:01, 2278.39 examples/s]Map:  34%|███▎      | 1675/5000 [00:01<00:01, 2591.37 examples/s]Map:  40%|███▉      | 1994/5000 [00:01<00:01, 2763.56 examples/s]Map:  46%|████▌     | 2312/5000 [00:01<00:00, 2885.08 examples/s]Map:  52%|█████▏    | 2619/5000 [00:01<00:00, 2936.94 examples/s]Map:  59%|█████▉    | 2938/5000 [00:01<00:00, 3006.68 examples/s]Map:  65%|██████▌   | 3250/5000 [00:01<00:00, 3035.50 examples/s]Map:  72%|███████▏  | 3594/5000 [00:01<00:00, 3152.28 examples/s]Map:  81%|████████  | 4056/5000 [00:02<00:00, 3120.53 examples/s]Map:  88%|████████▊ | 4385/5000 [00:02<00:00, 3161.27 examples/s]Map:  95%|█████████▍| 4729/5000 [00:02<00:00, 3237.52 examples/s]Map: 100%|██████████| 5000/5000 [00:02<00:00, 2060.48 examples/s]
-Map:   0%|          | 0/5000 [00:00<?, ? examples/s]Map:  20%|██        | 1000/5000 [00:00<00:01, 2055.19 examples/s]Map:  40%|████      | 2000/5000 [00:00<00:01, 2287.34 examples/s]Map:  60%|██████    | 3000/5000 [00:01<00:00, 2392.97 examples/s]Map:  80%|████████  | 4000/5000 [00:01<00:00, 2447.07 examples/s]Map: 100%|██████████| 5000/5000 [00:02<00:00, 2453.52 examples/s]Map: 100%|██████████| 5000/5000 [00:02<00:00, 2357.04 examples/s]
-Traceback (most recent call last):
-  File "/home/hy1331/nlp_hw4/hw4-code/part-1-code/main.py", line 231, in <module>
-    train_dataloader = create_augmented_dataloader(args, dataset)
-  File "/home/hy1331/nlp_hw4/hw4-code/part-1-code/main.py", line 121, in create_augmented_dataloader
-    transformed_tokenize.set_format('torch')
-NameError: name 'transformed_tokenize' is not defined
-/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-Traceback (most recent call last):
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 402, in hf_raise_for_status
-    response.raise_for_status()
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/requests/models.py", line 1026, in raise_for_status
-    raise HTTPError(http_error_msg, response=self)
-requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/out_augmented/resolve/main/config.json
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/utils/hub.py", line 409, in cached_file
-    resolved_file = hf_hub_download(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-    return fn(*args, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1007, in hf_hub_download
-    return _hf_hub_download_to_cache_dir(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1114, in _hf_hub_download_to_cache_dir
-    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1655, in _raise_on_head_call_error
-    raise head_call_error
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1543, in _get_metadata_or_catch_error
-    metadata = get_hf_file_metadata(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-    return fn(*args, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1460, in get_hf_file_metadata
-    r = _request_wrapper(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
-    response = _request_wrapper(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 307, in _request_wrapper
-    hf_raise_for_status(response)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 452, in hf_raise_for_status
-    raise _format(RepositoryNotFoundError, message, response) from e
-huggingface_hub.errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-6906a24f-36b8afeb389c5ee836f3a4fe;523f7438-90ac-4da3-81eb-9dbd1d3dcfd0)
-
-Repository Not Found for url: https://huggingface.co/out_augmented/resolve/main/config.json.
-Please make sure you specified the correct `repo_id` and `repo_type`.
-If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
-Invalid username or password.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/hy1331/nlp_hw4/hw4-code/part-1-code/main.py", line 242, in <module>
-    score = do_eval(eval_dataloader, args.model_dir, out_file)
-  File "/home/hy1331/nlp_hw4/hw4-code/part-1-code/main.py", line 75, in do_eval
-    model = AutoModelForSequenceClassification.from_pretrained(output_dir)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py", line 434, in from_pretrained
-    config, kwargs = AutoConfig.from_pretrained(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/models/auto/configuration_auto.py", line 852, in from_pretrained
-    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/configuration_utils.py", line 565, in get_config_dict
-    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/configuration_utils.py", line 620, in _get_config_dict
-    resolved_config_file = cached_file(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/utils/hub.py", line 424, in cached_file
-    raise EnvironmentError(
-OSError: out_augmented is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
-If this is a private repository, make sure to pass a token having permission to this repo with `use_auth_token` or log in with `huggingface-cli login` and pass `use_auth_token=True`.
-/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-Map: 100%|██████████| 25000/25000 [00:00<?, ? examples/s]Map: 25379 examples [00:00, 3753.34 examples/s]          Map: 25923 examples [00:00, 3664.06 examples/s]Map: 26463 examples [00:00, 3626.06 examples/s]Map: 26880 examples [00:00, 3789.64 examples/s]Map: 27410 examples [00:00, 3678.41 examples/s]Map: 27793 examples [00:00, 3716.56 examples/s]Map: 28169 examples [00:00, 3724.17 examples/s]Map: 28551 examples [00:00, 3746.99 examples/s]Map: 28947 examples [00:01, 3804.44 examples/s]Map: 29382 examples [00:01, 3009.54 examples/s]Map: 29785 examples [00:01, 3253.27 examples/s]Map: 30310 examples [00:01, 3335.21 examples/s]Map: 30688 examples [00:01, 3439.53 examples/s]Map: 31224 examples [00:01, 3483.51 examples/s]Map: 31622 examples [00:01, 3602.23 examples/s]Map: 32005 examples [00:01, 3659.50 examples/s]Map: 32553 examples [00:02, 3653.82 examples/s]Map: 32928 examples [00:02, 3677.45 examples/s]Map: 33456 examples [00:02, 3614.15 examples/s]Map: 33997 examples [00:02, 3604.98 examples/s]Map: 34364 examples [00:02, 3619.69 examples/s]Map: 34749 examples [00:02, 3673.66 examples/s]Map: 35274 examples [00:02, 3609.39 examples/s]Map: 35669 examples [00:02, 3690.83 examples/s]Map: 36045 examples [00:03, 3704.72 examples/s]Map: 36432 examples [00:03, 3746.43 examples/s]Map: 36813 examples [00:03, 3760.98 examples/s]Map: 37374 examples [00:03, 3748.26 examples/s]Map: 37888 examples [00:03, 3631.80 examples/s]Map: 38260 examples [00:03, 3651.08 examples/s]Map: 38645 examples [00:03, 3701.18 examples/s]Map: 39173 examples [00:03, 3629.02 examples/s]Map: 39548 examples [00:04, 3658.80 examples/s]Map: 39940 examples [00:04, 3724.32 examples/s]Map: 40469 examples [00:04, 3649.34 examples/s]Map: 40860 examples [00:04, 3713.70 examples/s]Map: 41239 examples [00:04, 3731.92 examples/s]Map: 41785 examples [00:04, 3690.39 examples/s]Map: 42316 examples [00:04, 3633.12 examples/s]Map: 42684 examples [00:04, 3644.05 examples/s]Map: 43219 examples [00:05, 3611.01 examples/s]Map: 43768 examples [00:05, 3620.80 examples/s]Map: 44134 examples [00:05, 3628.91 examples/s]Map: 44512 examples [00:05, 3664.54 examples/s]Map: 44947 examples [00:05, 3842.76 examples/s]Map: 45340 examples [00:05, 3864.82 examples/s]Map: 45912 examples [00:05, 3843.26 examples/s]Map: 46434 examples [00:05, 3709.87 examples/s]Map: 46976 examples [00:06, 3674.43 examples/s]Map: 47351 examples [00:06, 3688.68 examples/s]Map: 47882 examples [00:06, 3634.80 examples/s]Map: 48433 examples [00:06, 3643.78 examples/s]Map: 48819 examples [00:06, 3692.58 examples/s]Map: 49369 examples [00:06, 3679.03 examples/s]Map: 49792 examples [00:06, 3800.68 examples/s]Map: 50000 examples [00:06, 3631.89 examples/s]
-Map: 100%|██████████| 25000/25000 [00:00<?, ? examples/s]Map: 26000 examples [00:00, 2524.06 examples/s]          Map: 27000 examples [00:00, 2514.39 examples/s]Map: 28000 examples [00:01, 2522.38 examples/s]Map: 29000 examples [00:01, 2543.41 examples/s]Map: 30000 examples [00:01, 2509.03 examples/s]Map: 31000 examples [00:02, 2506.66 examples/s]Map: 32000 examples [00:02, 2500.08 examples/s]Map: 33000 examples [00:03, 2302.31 examples/s]Map: 34000 examples [00:03, 2343.14 examples/s]Map: 35000 examples [00:04, 2393.15 examples/s]Map: 36000 examples [00:04, 2431.28 examples/s]Map: 37000 examples [00:04, 2468.03 examples/s]Map: 38000 examples [00:05, 2452.54 examples/s]Map: 39000 examples [00:05, 2476.11 examples/s]Map: 40000 examples [00:06, 2482.57 examples/s]Map: 41000 examples [00:06, 2480.95 examples/s]Map: 42000 examples [00:06, 2492.71 examples/s]Map: 43000 examples [00:07, 2469.95 examples/s]Map: 44000 examples [00:07, 2480.67 examples/s]Map: 45000 examples [00:08, 2307.58 examples/s]Map: 46000 examples [00:08, 2362.41 examples/s]Map: 47000 examples [00:09, 2387.09 examples/s]Map: 48000 examples [00:09, 2436.44 examples/s]Map: 49000 examples [00:09, 2468.96 examples/s]Map: 50000 examples [00:10, 2487.79 examples/s]Map: 50000 examples [00:10, 2437.73 examples/s]
-Traceback (most recent call last):
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 402, in hf_raise_for_status
-    response.raise_for_status()
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/requests/models.py", line 1026, in raise_for_status
-    raise HTTPError(http_error_msg, response=self)
-requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/out_augmented/resolve/main/config.json
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/utils/hub.py", line 409, in cached_file
-    resolved_file = hf_hub_download(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-    return fn(*args, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1007, in hf_hub_download
-    return _hf_hub_download_to_cache_dir(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1114, in _hf_hub_download_to_cache_dir
-    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1655, in _raise_on_head_call_error
-    raise head_call_error
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1543, in _get_metadata_or_catch_error
-    metadata = get_hf_file_metadata(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-    return fn(*args, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 1460, in get_hf_file_metadata
-    r = _request_wrapper(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
-    response = _request_wrapper(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/file_download.py", line 307, in _request_wrapper
-    hf_raise_for_status(response)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 452, in hf_raise_for_status
-    raise _format(RepositoryNotFoundError, message, response) from e
-huggingface_hub.errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-6906a264-23843db172cc915635c07c90;ee7e6c50-1735-45f4-972b-9c99a75df20a)
-
-Repository Not Found for url: https://huggingface.co/out_augmented/resolve/main/config.json.
-Please make sure you specified the correct `repo_id` and `repo_type`.
-If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
-Invalid username or password.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/hy1331/nlp_hw4/hw4-code/part-1-code/main.py", line 250, in <module>
-    score = do_eval(eval_transformed_dataloader, args.model_dir, out_file)
-  File "/home/hy1331/nlp_hw4/hw4-code/part-1-code/main.py", line 75, in do_eval
-    model = AutoModelForSequenceClassification.from_pretrained(output_dir)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py", line 434, in from_pretrained
-    config, kwargs = AutoConfig.from_pretrained(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/models/auto/configuration_auto.py", line 852, in from_pretrained
-    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/configuration_utils.py", line 565, in get_config_dict
-    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/configuration_utils.py", line 620, in _get_config_dict
-    resolved_config_file = cached_file(
-  File "/scratch/hy1331/conda-envs/hw4-part-1-nlp/lib/python3.9/site-packages/transformers/utils/hub.py", line 424, in cached_file
-    raise EnvironmentError(
-OSError: out_augmented is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
-If this is a private repository, make sure to pass a token having permission to this repo with `use_auth_token` or log in with `huggingface-cli login` and pass `use_auth_token=True`.
