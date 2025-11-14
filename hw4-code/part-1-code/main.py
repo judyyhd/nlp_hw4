@@ -122,7 +122,7 @@ def create_augmented_dataloader(args, dataset):
 
     tokenized_train = train_dataset.map(tokenize_function, batched=True, load_from_cache_file=False)
     tokenized_train = tokenized_train.remove_columns(['text'])
-    tokenized_train = tokenized_train.rename_columns('label', 'labels')
+    tokenized_train = tokenized_train.rename_column('label', 'labels')
     tokenized_train.set_format('torch')
 
     from datasets import concatenate_datasets

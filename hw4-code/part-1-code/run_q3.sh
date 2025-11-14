@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=hw4_q3
-#SBATCH #SBATCH --output=q3_output_%j.log
+#SBATCH --output=q3_output_%j.log
 #SBATCH --error=q3_error_%j.log
 #SBATCH --time=03:00:00
 #SBATCH --mem=16GB
